@@ -1,9 +1,24 @@
 "use client";
 import Link from "next/link";
 import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { GiLoveSong } from "react-icons/gi";
 
+type Inputs = {
+  email: string
+  password: string
+}
+
 const SignIn = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>()
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data)
+  }
+
   return (
     <div className="w-[400px] h-fit bg-[#3b3b3b] p-10">
       <div className="flex items-center justify-center text-white">
@@ -13,12 +28,13 @@ const SignIn = () => {
       <p className="text-center text-white font-semibold text-[24px] my-5">
         Sign In
       </p>
-      <form action="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col text-white gap-1">
           <label htmlFor="">Email</label>
           <input
             type="email"
             placeholder="example@gmail.com"
+            {...register("email")}
             className="px-6 py-1 bg-black rounded-md"
           />
         </div>
@@ -27,6 +43,7 @@ const SignIn = () => {
           <input
             type="password"
             placeholder="password"
+            {...register("password")}
             className="px-6 py-1 bg-black rounded-md"
           />
         </div>

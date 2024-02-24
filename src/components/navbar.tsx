@@ -4,6 +4,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { TiMicrophone } from "react-icons/ti";
 import SignIn from "./modal/signin";
 import Signup from "./modal/signup";
+// import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [signinOpen, setSigninOpen] = useState<boolean>(false);
@@ -11,6 +12,11 @@ const Navbar = () => {
   const modalSigninRef = useRef(null);
   const modalSigbupRef = useRef(null);
   const user = null;
+
+  // const { data: session } = useSession();
+
+  // console.log("session auth", session);
+  
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
