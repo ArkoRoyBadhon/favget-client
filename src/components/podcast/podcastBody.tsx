@@ -1,6 +1,16 @@
+"use client";
+import { useSession } from "next-auth/react";
 import PodcastCategory from "./homeCategory";
+import { useRouter } from "next/navigation";
 
 const PodcastBody = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (!session?.user?.email) {
+    router.push("/");
+  }
+
   return (
     <div className="px-10">
       <div className="">

@@ -11,7 +11,6 @@ const Navbar = () => {
   const [signUpOpen, setSignUpOpen] = useState<boolean>(false);
   const modalSigninRef = useRef(null);
   const modalSigbupRef = useRef(null);
-  const user = null;
 
   const { data: session } = useSession();
 
@@ -44,7 +43,7 @@ const Navbar = () => {
       {signinOpen && (
         <div
           ref={modalSigninRef}
-          className="absolute z-10 top-[100px] rounded-sm left-[30%]"
+          className="absolute z-20 top-[100px] rounded-sm left-[30%]"
         >
           <SignIn />
         </div>
@@ -52,7 +51,7 @@ const Navbar = () => {
       {signUpOpen && (
         <div
           ref={modalSigbupRef}
-          className="absolute z-10 top-[100px] rounded-sm left-[30%]"
+          className="absolute z-20 top-[100px] rounded-sm left-[30%]"
         >
           <Signup />
         </div>
@@ -78,14 +77,14 @@ const Navbar = () => {
           <div className="text-white flex justify-center items-center gap-3">
             <button
               onClick={() => setSigninOpen(!signinOpen)}
-              className="px-5 py-[6px] rounded-3xl bg-gray-700"
+              className="px-8 py-[6px] rounded-3xl bg-gray-700"
             >
               Sign In
             </button>
 
             <button
               onClick={() => setSignUpOpen(!signUpOpen)}
-              className="px-5 py-[6px] rounded-3xl bg-gray-700"
+              className="px-8 py-[6px] rounded-3xl bg-gray-700"
             >
               Sign Up
             </button>
