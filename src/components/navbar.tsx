@@ -4,31 +4,29 @@ import { IoSearchOutline } from "react-icons/io5";
 import { TiMicrophone } from "react-icons/ti";
 import SignIn from "./modal/signin";
 import Signup from "./modal/signup";
-// import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [signinOpen, setSigninOpen] = useState<boolean>(false);
-  const [signUpOpen, setSignUpOpen] = useState<boolean>(true);
+  const [signUpOpen, setSignUpOpen] = useState<boolean>(false);
   const modalSigninRef = useRef(null);
   const modalSigbupRef = useRef(null);
   const user = null;
 
-  // const { data: session } = useSession();
-
-  // console.log("session auth", session);
-  
+  const { data: session } = useSession();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        //@ts-ignore
-        (modalSigninRef.current && !modalSigninRef.current.contains(event.target as Node)) ||
-        //@ts-ignore
-        (modalSigbupRef.current && !modalSigbupRef.current.contains(event.target as Node))
-        
+        (modalSigninRef.current &&
+          //@ts-ignore
+          !modalSigninRef.current.contains(event.target as Node)) ||
+        (modalSigbupRef.current &&
+          //@ts-ignore
+          !modalSigbupRef.current.contains(event.target as Node))
       ) {
-        setSigninOpen(false)
-        setSignUpOpen(false)
+        setSigninOpen(false);
+        setSignUpOpen(false);
       }
     };
 
@@ -60,10 +58,10 @@ const Navbar = () => {
         </div>
       )}
       <p className="text-white font-semibold text-[20px]">
-        Welcome, Arko Roy Badhon
+        Welcome, <span className="capitalize">{session?.user?.name}</span>
       </p>
       <div className="flex items-center gap-5">
-        {user ? (
+        {session?.user?.email ? (
           <div className="flex items-center gap-5">
             <div className="bg-gray-300 px-2 py-1 rounded-3xl flex items-center gap-2">
               <IoSearchOutline className="text-gray-600" />
@@ -81,11 +79,14 @@ const Navbar = () => {
             <button
               onClick={() => setSigninOpen(!signinOpen)}
               className="px-5 py-[6px] rounded-3xl bg-gray-700"
-              >
+            >
               Sign In
             </button>
-              
-            <button onClick={() => setSignUpOpen(!signUpOpen)} className="px-5 py-[6px] rounded-3xl bg-gray-700">
+
+            <button
+              onClick={() => setSignUpOpen(!signUpOpen)}
+              className="px-5 py-[6px] rounded-3xl bg-gray-700"
+            >
               Sign Up
             </button>
           </div>

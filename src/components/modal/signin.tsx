@@ -1,23 +1,33 @@
 "use client";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { GiLoveSong } from "react-icons/gi";
 
 type Inputs = {
-  email: string
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 const SignIn = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data)
-  }
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = async (data, event) => {
+    event?.preventDefault();
+
+    // console.log(data);
+    const res = await signIn("credentials", {
+      email: data?.email,
+      password: data?.password,
+      // redirect: false,
+    });
+
+    // console.log("credential", res);
+  };
 
   return (
     <div className="w-[400px] h-fit bg-[#3b3b3b] p-10">
@@ -54,7 +64,9 @@ const SignIn = () => {
         />
       </form>
       <div className="mt-10">
-        <span className="text-white text-[12px]">Don't have account? Create an account</span>{" "}
+        <span className="text-white text-[12px]">
+          Don't have account? Create an account
+        </span>{" "}
         <Link className="text-blue-200 text-[12px]" href="/">
           signup
         </Link>

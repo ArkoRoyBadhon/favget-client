@@ -2,6 +2,7 @@ import Link from "next/link";
 import { GiLoveSong } from "react-icons/gi";
 
 const Signup = () => {
+  
     return (
         <div className="w-[400px] h-fit bg-[#3b3b3b] p-10">
       <div className="flex items-center justify-center text-white">

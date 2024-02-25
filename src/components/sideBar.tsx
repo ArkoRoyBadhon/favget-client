@@ -5,13 +5,14 @@ import { PiMusicNoteSimpleBold, PiPlaylistLight } from "react-icons/pi";
 import { MdSettings } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import { usePathname, useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const SideBar = () => {
   const pathUrl = usePathname()
   const router = useRouter()
   
   return (
-    <div className="sticky w-full text-white bg-gray-600 h-[100vh] px-5 py-10">
+    <div className="sticky w-full text-white bg-[#3b3b3b] h-[100vh] px-5 py-10">
       <div className="flex items-center">
         <GiLoveSong size={20} />
         <span className="text-[26px]">Favget</span>
@@ -34,7 +35,7 @@ const SideBar = () => {
           <MdSettings size={16} />
           <span className="text-[16px] font-semibold">Settings</span>
         </div>
-        <div className={`flex items-center gap-5 mt-5 cursor-pointer hover:text-green-400 ${pathUrl === "/logout" && "text-green-400"}`}>
+        <div onClick={()=> signOut()} className={`flex items-center gap-5 mt-5 cursor-pointer hover:text-green-400 ${pathUrl === "/logout" && "text-green-400"}`}>
           <IoIosLogOut size={16} />
           <span className="text-[16px] font-semibold">Logout</span>
         </div>
