@@ -1,15 +1,24 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const SettingBody = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  if (!session?.user?.email) {
-    // console.log(session?.user?.email);
-    router.push("/");
-  }
+  // if (!session?.user?.email) {
+  //   // console.log(session?.user?.email);
+  //   router.push("/");
+  // }
+
+  useEffect(() => {
+    if (!session?.user) {
+      if (!session?.user) {
+        router.push('/');
+      }
+    }
+  }, [session]);
 
   return (
     <div className="text-white px-10">

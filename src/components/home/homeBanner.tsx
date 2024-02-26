@@ -4,9 +4,11 @@ import Image from "next/image";
 import { PiCrownSimpleLight } from "react-icons/pi";
 import guiterImg from "@/assets/guiter.jpg";
 import bannerimg from '@/assets/man_thumb.png'
+import { useRouter } from "next/navigation";
 
 const HomeBanner = () => {
   const { data: session } = useSession();
+  const router = useRouter()
 
   return (
     <div className="">
@@ -33,7 +35,7 @@ const HomeBanner = () => {
               </p>
 
               <div className="flex gap-5 mt-10">
-                <button className="px-8 py-2 rounded-3xl bg-black">
+                <button onClick={()=> router.push("/payment")} className="px-8 py-2 rounded-3xl bg-black">
                   Upgrade Now
                 </button>
                 <button className="px-8 py-2 rounded-3xl bg-blue-900">

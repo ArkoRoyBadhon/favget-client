@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/v1",
+    baseUrl: "https://favget-server.vercel.app",
     credentials: "include",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("accessToken");
@@ -15,6 +15,6 @@ export const api = createApi({
     },
   }),
   refetchOnMountOrArgChange: 30,
-  tagTypes: ["user", "donation"],
+  tagTypes: ["user"],
   endpoints: () => ({}),
 });

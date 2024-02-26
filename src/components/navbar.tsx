@@ -53,7 +53,7 @@ const Navbar = () => {
           ref={modalSigbupRef}
           className="absolute z-20 top-[100px] rounded-sm left-[30%]"
         >
-          <Signup />
+          <Signup setSignUpOpen={setSignUpOpen} />
         </div>
       )}
       <p className="text-white font-semibold text-[20px]">

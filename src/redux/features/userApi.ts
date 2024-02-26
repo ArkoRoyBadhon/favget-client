@@ -2,16 +2,31 @@ import { api } from "../api/apiSlice";
 
 const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getUser: builder.query({
-      query: () => ({
-        url: `/getUser`,
+    createUser: builder.mutation({
+      query: (data) => ({
+        url: `/signup`,
+        method: "POST",
+        body: data,
       }),
-      providesTags: ["user"],
+      invalidatesTags: ["user"],
+    }),
+    getUser: builder.mutation({
+      query: (data) => ({
+        url: `/getUser`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["user"],
+    }),
+    updateUser: builder.mutation({
+      query: (data) => ({
+        url: `/updateUser`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["user"],
     }),
   }),
 });
 
-export const { useGetUserQuery } = userApi;
-
-
-
+export const { useCreateUserMutation,useGetUserMutation, useUpdateUserMutation } = userApi;

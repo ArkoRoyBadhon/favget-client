@@ -1,4 +1,3 @@
-import { useGetUserQuery } from "@/redux/features/userApi";
 import { AuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -11,30 +10,33 @@ const authOptions: AuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "email" },
+        email: { label: "Username", type: "email", placeholder: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+
         const res = await fetch("http://localhost:5000/getUser", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: "arko@gmail.com",
+            // email: "arko@gmail.com",
+            email: credentials?.email,
           }),
         });
 
         const user = await res.json();
 
         if (
-          credentials?.username === user?.data?.email ||
+          credentials?.email === user?.data?.email ||
           credentials?.password === user?.data?.password
         ) {
           return {
             id: "1",
             name: user?.data?.username,
             email: user?.data?.email,
+            package: user?.data?.package
           };
         } else {
           return null;
